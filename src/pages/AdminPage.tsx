@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Navbar } from '@/components/Navbar';
 import { AdminProvider } from '@/contexts/AdminContext';
 import { LeagueHeader } from '@/components/LeagueHeader';
 import { StandingsTable } from '@/components/StandingsTable';
@@ -8,7 +9,6 @@ import { PlayerForm } from '@/components/PlayerForm';
 import { MatchForm } from '@/components/MatchForm';
 import { TeamLogoUploader } from '@/components/TeamLogoUploader';
 import { LeagueSettingsForm } from '@/components/LeagueSettingsForm';
-import { ArchivedLeagues } from '@/components/ArchivedLeagues';
 import { Button } from '@/components/ui/button';
 import { useLeagueStore } from '@/store/leagueStore';
 import { UserPlus, Play, RotateCcw, Settings, Archive } from 'lucide-react';
@@ -45,8 +45,10 @@ const AdminPage = () => {
   return (
     <AdminProvider isAdmin={true}>
       <div className="relative w-full min-h-screen overflow-x-hidden">
+        <Navbar />
+
         {/* Hero section */}
-        <div className="relative w-full h-screen">
+        <div className="relative w-full h-[calc(100vh-3.5rem)] md:h-[calc(100vh-4rem)]">
           <img
             src={heroBg}
             alt="Ocean background"
@@ -94,7 +96,7 @@ const AdminPage = () => {
               <AlertDialog>
                 <AlertDialogTrigger asChild>
                   <Button variant="destructive" className="gap-2">
-                    <RotateCcw className="w-4 h-4" /> Reset League
+                    <RotateCcw className="w-4 h-4" /> Reset
                   </Button>
                 </AlertDialogTrigger>
                 <AlertDialogContent className="bg-card border-border">
@@ -114,7 +116,7 @@ const AdminPage = () => {
           </div>
         </div>
 
-        {/* Scrollable content */}
+        {/* Content */}
         <div className="relative z-10 container mx-auto px-4 pb-12 max-w-full">
           <div className="grid lg:grid-cols-2 gap-6 mt-6">
             <div className="space-y-6 min-w-0">
@@ -123,11 +125,6 @@ const AdminPage = () => {
               <MatchHistory />
             </div>
             <TopScorers onEditPlayer={handleEditPlayer} />
-          </div>
-
-          {/* Archived Leagues */}
-          <div className="mt-12">
-            <ArchivedLeagues />
           </div>
         </div>
 
